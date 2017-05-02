@@ -16,7 +16,7 @@ import thunkMiddlware from 'redux-thunk'
 
 import App from '../shared/app'
 import helloReducer from '../shared/reducer/hello'
-import { APP_CONTAINER_SELECTOR } from '../shared/config'
+import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 import setUpSocket from './socket'
 
@@ -58,6 +58,10 @@ if (module.hot) {
     ReactDOM.render(wrapApp(NextApp), rootEl)
   })
 }
+
+const jssServerSide = document.querySelector(JSS_SSR_SELECTOR)
+// flow-disable-next-line
+jssServerSide.parentElement.removeChild(jssServerSide)
 
 setUpSocket(store)
 
